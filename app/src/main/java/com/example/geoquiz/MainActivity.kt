@@ -8,11 +8,16 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 
+
+
 private lateinit var true_button:Button
 private lateinit var false_button:Button
 private lateinit var next_button:ImageButton
 private lateinit var previous_button:ImageButton
 private lateinit var questionTextView:TextView
+
+
+
 
 private val questionBank = listOf(Question(R.string.question_australia,true),
     Question(R.string.question_australia,true),
@@ -22,7 +27,6 @@ private val questionBank = listOf(Question(R.string.question_australia,true),
     Question(R.string.question_americas,true),
     Question(R.string.question_asia,true)
 )
-
 private var currentindex = 0
 
 class MainActivity : AppCompatActivity() {
@@ -30,17 +34,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         true_button = findViewById(R.id.true_button)
         false_button = findViewById(R.id.false_button)
         next_button = findViewById(R.id.next_button)
         previous_button = findViewById(R.id.previous_button)
         questionTextView = findViewById(R.id.questionTextView)
 
+        questionTextView.setOnClickListener{
+            currentindex=(currentindex+1) % questionBank.size
+            val questionTextResId = questionBank[currentindex].textResId
+            questionTextView.setText(questionTextResId)
+        }
         true_button.setOnClickListener{
             if (questionBank[currentindex].answer){
-            val toast = Toast.makeText(this, R.string.correct, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
+                val toast = Toast.makeText(this, R.string.correct, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
             }
         }
 
