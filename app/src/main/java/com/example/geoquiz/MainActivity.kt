@@ -20,7 +20,6 @@ private lateinit var questionTextView:TextView
 
 
 private val questionBank = listOf(Question(R.string.question_australia,true),
-    Question(R.string.question_australia,true),
     Question(R.string.question_oceans,true),
     Question(R.string.question_Russia,true),
     Question(R.string.question_africa,false),
@@ -66,9 +65,12 @@ class MainActivity : AppCompatActivity() {
         questionTextView.setText(questionTextResId)
 
         next_button.setOnClickListener{
-            currentindex=(currentindex+1) % questionBank.size
-            val questionTextResId = questionBank[currentindex].textResId
-            questionTextView.setText(questionTextResId)
+            if (currentindex<5)
+            {
+                currentindex=(currentindex+1) % questionBank.size
+                val questionTextResId = questionBank[currentindex].textResId
+                questionTextView.setText(questionTextResId)
+            }
         }
 
         previous_button.setOnClickListener{
